@@ -143,6 +143,13 @@ spec:
 
       2. Code Standards:
         - Do not use progress bars (e.g., `tqdm`) in the implementation.
+        - Use the following cache decorator to cache the results of the function:
+          ```python
+          from joblib import Memory
+          memory = Memory(location='/tmp/cache', verbose=0)
+          @memory.cache
+          def model_workflow(...):
+          ```
 
       3. Precautions:
         - Ensure input arrays (`X`, `y`, `val_X`, `val_y`, `test_X`) have consistent dimensions and shapes.
