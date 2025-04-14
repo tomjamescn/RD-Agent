@@ -46,7 +46,7 @@ class DataLoaderCoSTEEREvaluator(CoSTEEREvaluator):
             )
 
         env = get_ds_env(
-            extra_volumes={f"{DS_RD_SETTING.local_data_path}/sample/{self.scen.competition}": "/kaggle/input"}
+            extra_volumes={f"{DS_RD_SETTING.local_data_path}{'/sample' if DS_RD_SETTING.use_sample else ''}/{self.scen.competition}": "/kaggle/input"}
         )
 
         # TODO: do we need to clean the generated temporary content?
