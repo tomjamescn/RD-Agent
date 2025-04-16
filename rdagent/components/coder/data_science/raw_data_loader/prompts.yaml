@@ -245,40 +245,14 @@ spec:
           ```python
           available_models = [f for f in os.listdir('.') if f.startswith('model_') and 'test' not in f]
           ```
-      2. Feature Engineering
-        - The feature engineering should be called only once. For example:
-          `X_transformed, y_transformed, X_test_transformed = feat_eng(X, y, X_test)`
-        - It should be called before dataset splitting.
-
-      3. Dataset Splitting
-        - The dataset returned by `load_data` is not pre-split. After calling `feat_eng`, split the data into training and test sets.
-        - [Notice] If feasible, apply cross-validation on the training set (`X_transformed`, `y_transformed`) to ensure a reliable assessment of model performance.
-        - Keep the test set (`X_test_transformed`) unchanged, as it is only used for generating the final predictions.
-        - Pseudocode logic for reference:
-          ```
-          Set number of splits and initialize KFold cross-validator.
-          Create dictionaries for validation and test predictions.
-          For each model file:
-              Import the model dynamically.
-              Initialize arrays for out-of-fold (OOF) and test predictions.
-              For each fold in KFold:
-                  Split data into training and validation sets.
-                  Run model workflow to get validation and test predictions.
-                  Validate shapes.
-                  Store validation and test predictions.
-              Compute average test predictions across folds.
-              Save OOF and averaged test predictions.
-          Ensemble predictions from all models and print the final shape.
-          ```
-
-      4. Submission File:
+      2. Submission File:
         - Save the final predictions as `submission.csv`, ensuring the format matches the competition requirements (refer to `sample_submission` in the Folder Description for the correct structure).
         - Present the required submission format explicitly and ensure the output adheres to it.
 
-      5. Code Standards:
+      3. Code Standards:
         - Do not use progress bars (e.g., tqdm) in the code.
 
-      6. Ensemble Strategy:
+      4. Ensemble Strategy:
         Consolidate all model outputs into a dictionary, where each key is the model's filename (excluding the .py extension) and its corresponding value is the model's output.
         Sample code:
         {% raw %}
@@ -298,7 +272,7 @@ spec:
         {% endraw %}
 
       {% if latest_spec %}
-      7. Former Specification:
+      5. Former Specification:
         {{ latest_spec }}
         You should follow the provided specifications to improve this task.
       {% endif %}
