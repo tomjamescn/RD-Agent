@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>基准测试 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    
+    <script src="../_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="开发" href="dev.html" />
+    <link rel="prev" title="研究" href="catalog.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="dev.html" title="开发"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="catalog.html" title="研究"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" accesskey="U">研究</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">基准测试</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="benchmark">
+<h1>基准测试<a class="headerlink" href="#benchmark" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<h2>介绍<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>研发能力的基准测试是该领域一个重要的研究问题。我们不断探索基准测试这些能力的方法。当前的基准测试列在此页面上。</p>
+</section>
+<section id="development-capability-benchmarking">
+<h2>开发能力基准测试<a class="headerlink" href="#development-capability-benchmarking" title="Link to this heading">¶</a></h2>
+<p>基准测试用于评估固定数据因素的有效性。它主要包括以下步骤：</p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#data"><span class="std std-ref">读取并准备评估数据</span></a></p></li>
+<li><p><a class="reference internal" href="#config"><span class="std std-ref">声明要测试的方法并传递参数</span></a></p></li>
+<li><p><a class="reference internal" href="#config"><span class="std std-ref">声明评估方法并传递参数</span></a></p></li>
+<li><p><a class="reference internal" href="#run"><span class="std std-ref">运行评估</span></a></p></li>
+<li><p><a class="reference internal" href="#show"><span class="std std-ref">保存并显示结果</span></a></p></li>
+</ol>
+<section id="configuration">
+<h3>配置<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h3>
+<dl class="py class pydantic_settings" id="config">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">settings</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.components.benchmark.conf.</span></span><span class="sig-name descname"><span class="pre">BenchmarkSettings</span></span><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings" title="Link to this definition">¶</a></dt>
+<dd><p><details  class="autodoc_pydantic_collapsable_json">
+<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;BenchmarkSettings&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;bench_data_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;example.json&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bench Data Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;bench_test_round&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bench Test Round&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;bench_test_case_n&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">         </span><span class="p">],</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bench Test Case N&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;bench_method_cls&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.components.coder.factor_coder.FactorCoSTEER&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bench Method Cls&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;bench_method_extra_kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bench Method Extra Kwargs&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;bench_result_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;result&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Bench Result Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details></p><dl class="field-list simple">
+<dt class="field-odd">配置<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_prefix</strong>: <em>str = BENCHMARK_</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">字段<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_data_path" title="rdagent.components.benchmark.conf.BenchmarkSettings.bench_data_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bench_data_path</span> <span class="pre">(pathlib.Path)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_cls" title="rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_cls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bench_method_cls</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_extra_kwargs" title="rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_extra_kwargs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bench_method_extra_kwargs</span> <span class="pre">(dict)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_result_path" title="rdagent.components.benchmark.conf.BenchmarkSettings.bench_result_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bench_result_path</span> <span class="pre">(pathlib.Path)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_case_n" title="rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_case_n"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bench_test_case_n</span> <span class="pre">(int</span> <span class="pre">|</span> <span class="pre">None)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_round" title="rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_round"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bench_test_round</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.bench_data_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bench_data_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PosixPath('example.json')</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_data_path" title="Link to this definition">¶</a></dt>
+<dd><p>基准测试数据</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_cls">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bench_method_cls</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.components.coder.factor_coder.FactorCoSTEER'</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_cls" title="Link to this definition">¶</a></dt>
+<dd><p>测试用例使用的方法</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_extra_kwargs">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bench_method_extra_kwargs</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><em class="property"> <span class="pre">[Optional]</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_extra_kwargs" title="Link to this definition">¶</a></dt>
+<dd><p>除任务列表外，待测试方法的额外关键字参数</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.bench_result_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bench_result_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Path</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">PosixPath('result')</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_result_path" title="Link to this definition">¶</a></dt>
+<dd><p>结果保存路径</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_case_n">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bench_test_case_n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_case_n" title="Link to this definition">¶</a></dt>
+<dd><p>要运行的测试用例数量；如果未给出，则将运行所有测试用例</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_round">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bench_test_round</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_round" title="Link to this definition">¶</a></dt>
+<dd><p>要运行的轮数，每轮可能耗时10分钟</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.Config">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Config</span></span><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.Config" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="rdagent.components.benchmark.conf.BenchmarkSettings.Config.env_prefix">
+<span class="sig-name descname"><span class="pre">env_prefix</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'BENCHMARK_'</span></em><a class="headerlink" href="#rdagent.components.benchmark.conf.BenchmarkSettings.Config.env_prefix" title="Link to this definition">¶</a></dt>
+<dd><p>使用 <cite>BENCHMARK_</cite> 作为环境变量的前缀</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<section id="example">
+<h4>示例<a class="headerlink" href="#example" title="Link to this heading">¶</a></h4>
+<p id="id1"><code class="docutils literal notranslate"><span class="pre">bench_test_round</span></code> 的默认值为10，运行大约需要2小时。要将其从 <code class="docutils literal notranslate"><span class="pre">10</span></code> 修改为 <code class="docutils literal notranslate"><span class="pre">2</span></code>，请按照以下所示调整 .env 文件中的环境变量。</p>
+<div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="na">BENCHMARK_BENCH_TEST_ROUND</span><span class="o">=</span><span class="s">2</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="data-format">
+<h3>数据格式<a class="headerlink" href="#data-format" title="Link to this heading">¶</a></h3>
+<p id="data"><code class="docutils literal notranslate"><span class="pre">bench_data_path</span></code> 中的示例数据是一个字典，每个键代表一个因素名称。与每个键相关联的值是包含以下信息的因素数据：</p>
+<ul class="simple">
+<li><p><strong>描述</strong>：因素的文本描述。</p></li>
+<li><p><strong>公式</strong>：表示模型公式的 LaTeX 公式。</p></li>
+<li><p><strong>变量</strong>：涉及该因素的变量字典。</p></li>
+<li><p><strong>类别</strong>：因素的类别或分类。</p></li>
+<li><p><strong>难度</strong>：实现或理解该因素的难度级别。</p></li>
+<li><p><strong>gt_code</strong>：与该因素相关联的一段代码。</p></li>
+</ul>
+<p>以下是该数据格式的示例：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Turnover_Rate_Factor&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A traditional factor based on 20-day average turnover rate, adjusted for market capitalization, which is further improved by applying the information distribution theory.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;formulation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\text{Adjusted Turnover Rate} = \\frac{\\text{mean}(20\\text{-day turnover rate})}{\\text{Market Capitalization}}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;20-day turnover rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Average turnover rate over the past 20 days.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Market Capitalization&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Total market value of a company&#39;s outstanding shares.&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;Category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fundamentals&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Easy&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;gt_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;import pandas as pd\n\ndata_f = pd.read_hdf(&#39;daily_f.h5&#39;)\n\ndata = data_f.reset_index()\nwindow_size = 20\n\nnominator=data.groupby(&#39;instrument&#39;)[[&#39;TurnoverRate_30D&#39;]].rolling(window=window_size).mean().reset_index(0, drop=True)\n# transfer to series\nnew=nominator[&#39;TurnoverRate_30D&#39;]\ndata[&#39;Turnover_Rate_Factor&#39;]=new/data[&#39;TradableACapital&#39;]\n\n# set the datetime and instrument as index and drop the original index\nresult=pd.DataFrame(data[&#39;Turnover_Rate_Factor&#39;]).set_index(data_f.index)\n\n# transfer the result to series\nresult=result[&#39;Turnover_Rate_Factor&#39;]\nresult.to_hdf(\&quot;result.h5\&quot;, key=\&quot;data\&quot;)&quot;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;PctTurn20&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A factor representing the percentage change in turnover rate over the past 20 trading days, market-value neutralized.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;formulation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\text{PctTurn20} = \\frac{1}{N} \\sum_{i=1}^{N} \\left( \\frac{\\text{Turnover}_{i, t} - \\text{Turnover}_{i, t-20}}{\\text{Turnover}_{i, t-20}} \\right)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;N&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Number of stocks in the market.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Turnover_{i, t}&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Turnover of stock i at day t.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;Turnover_{i, t-20}&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Turnover of stock i at day t-20.&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;Category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Volume&amp;Price&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;gt_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;import pandas as pd\nfrom statsmodels import api as sm\n\ndef fill_mean(s: pd.Series) -&gt; pd.Series:\n    return s.fillna(s.mean()).fillna(0.0)\n\ndef market_value_neutralize(s: pd.Series, mv: pd.Series) -&gt; pd.Series:\n    s = s.groupby(\&quot;datetime\&quot;, group_keys=False).apply(fill_mean)\n    mv = mv.groupby(\&quot;datetime\&quot;, group_keys=False).apply(fill_mean)\n\n    df_f = mv.to_frame(\&quot;MarketValue\&quot;)\n    df_f[\&quot;const\&quot;] = 1\n    X = df_f[[\&quot;MarketValue\&quot;, \&quot;const\&quot;]]\n\n    # Perform the Ordinary Least Squares (OLS) regression\n    model = sm.OLS(s, X)\n    results = model.fit()\n\n    # Calculate the residuals\n    df_f[\&quot;residual\&quot;] = results.resid\n    df_f[\&quot;norm_resi\&quot;] = df_f.groupby(level=\&quot;datetime\&quot;, group_keys=False)[\&quot;residual\&quot;].apply(\n        lambda x: (x - x.mean()) / x.std(),\n    )\n    return df_f[\&quot;norm_resi\&quot;]\n\n\n# get_turnover\ndf_pv = pd.read_hdf(\&quot;daily_pv.h5\&quot;, key=\&quot;data\&quot;)\ndf_f = pd.read_hdf(\&quot;daily_f.h5\&quot;, key=\&quot;data\&quot;)\nturnover = df_pv[\&quot;$money\&quot;] / df_f[\&quot;TradableMarketValue\&quot;]\n\nf = turnover.groupby(\&quot;instrument\&quot;).pct_change(periods=20)\n\nf_neutralized = market_value_neutralize(f, df_f[\&quot;TradableMarketValue\&quot;])\n\nf_neutralized.to_hdf(\&quot;result.h5\&quot;, key=\&quot;data\&quot;)&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;PB_ROE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Constructed using the ranking difference between PB and ROE, with PB and ROE replacing original PB and ROE to obtain reconstructed factor values.&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;formulation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\\text{rank}(PB\\_t) - rank(ROE_t)&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;\\text{rank}(PB_t)&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ranking PB on cross-section at time t.&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;\\text{rank}(ROE_t)&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ranking single-quarter ROE on cross-section at time t.&quot;</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="nt">&quot;Category&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High-Frequency&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Difficulty&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hard&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;gt_code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env python\n\nimport pandas as pd\n\ndata_f = pd.read_hdf(&#39;daily_f.h5&#39;)\n\ndata = data_f.reset_index()\n\n# Calculate the rank of PB and ROE\ndata[&#39;PB_rank&#39;] = data.groupby(&#39;datetime&#39;)[&#39;B/P&#39;].rank()\ndata[&#39;ROE_rank&#39;] = data.groupby(&#39;datetime&#39;)[&#39;ROE&#39;].rank()\n\n# Calculate the difference between the ranks\ndata[&#39;PB_ROE&#39;] = data[&#39;PB_rank&#39;] - data[&#39;ROE_rank&#39;]\n\n# set the datetime and instrument as index and drop the original index\nresult=pd.DataFrame(data[&#39;PB_ROE&#39;]).set_index(data_f.index)\n\n# transfer the result to series\nresult=result[&#39;PB_ROE&#39;]\nresult.to_hdf(\&quot;result.h5\&quot;, key=\&quot;data\&quot;)&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>确保数据放置在 <code class="docutils literal notranslate"><span class="pre">FACTOR_COSTEER_SETTINGS.data_folder_debug</span></code> 中。数据文件应为 <code class="docutils literal notranslate"><span class="pre">.h5</span></code> 或 <code class="docutils literal notranslate"><span class="pre">.md</span></code> 格式，并且不得存储在任何子文件夹中。LLM-Agents 将审核文件内容并执行任务。</p>
+</section>
+<section id="run-benchmark">
+<h3>运行基准测试<a class="headerlink" href="#run-benchmark" title="Link to this heading">¶</a></h3>
+<p id="run">完成 <a class="reference internal" href="../installation_and_configuration.html"><span class="doc">安装与配置</span></a> 后启动基准测试。</p>
+<div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="na">dotenv</span><span class="w"> </span><span class="s">run -- python rdagent/app/benchmark/factor/eval.py</span>
+</pre></div>
+</div>
+<p>完成后，将生成一个 pkl 文件，其路径将在控制台的最后一行打印。</p>
+</section>
+<section id="show-result">
+<h3>显示结果<a class="headerlink" href="#show-result" title="Link to this heading">¶</a></h3>
+<p id="show"><code class="docutils literal notranslate"><span class="pre">analysis.py</span></code> 脚本从 pkl 文件读取数据并将其转换为图像。请修改 <code class="docutils literal notranslate"><span class="pre">rdagent/app/quant_factor_benchmark/analysis.py</span></code> 中的 Python 代码，以指定 pkl 文件的路径和 png 文件的输出路径。</p>
+<div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="na">dotenv</span><span class="w"> </span><span class="s">run -- python rdagent/app/benchmark/factor/analysis.py &lt;log/path to.pkl&gt;</span>
+</pre></div>
+</div>
+<p>一个 png 文件将被保存到指定路径，如下所示。</p>
+<img alt="../_images/benchmark.png" src="../_images/benchmark.png" />
+</section>
+<section id="related-paper">
+<h3>相关论文<a class="headerlink" href="#related-paper" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/2404.11276">面向数据中心的自动化研发</a>: 我们开发了一个名为 RD2Bench 的综合基准，以评估数据和模型的研发能力。该基准包括一系列任务，概述了模型的特征或结构。这些任务用于评估 LLM-Agents 实现它们的能力。</p></li>
+</ul>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@misc</span><span class="p">{</span><span class="nl">chen2024datacentric</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="p">=</span><span class="s">{Towards Data-Centric Automatic R&amp;D}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="p">=</span><span class="s">{Haotian Chen and Xinjie Shen and Zeqi Ye and Wenjun Feng and Haoxue Wang and Xiao Yang and Xu Yang and Weiqing Liu and Jiang Bian}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="p">=</span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">eprint</span><span class="p">=</span><span class="s">{2404.11276}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">archivePrefix</span><span class="p">=</span><span class="s">{arXiv}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">primaryClass</span><span class="p">=</span><span class="s">{cs.AI}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="https://github.com/user-attachments/assets/494f55d3-de9e-4e73-ba3d-a787e8f9e841" src="https://github.com/user-attachments/assets/494f55d3-de9e-4e73-ba3d-a787e8f9e841" />
+<p>要复制论文中详细描述的基准，请查阅以下文件中列出的因素： <a class="reference external" href="../_static/RD2bench.json">RD2bench.json</a>。请注意，在评估结果时使用 <code class="docutils literal notranslate"><span class="pre">only_correct_format=False</span></code>。</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">基准测试</a><ul>
+<li><a class="reference internal" href="#introduction">介绍</a></li>
+<li><a class="reference internal" href="#development-capability-benchmarking">开发能力基准测试</a><ul>
+<li><a class="reference internal" href="#configuration">配置</a><ul>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_data_path"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.bench_data_path</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_cls"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.bench_method_cls</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_method_extra_kwargs"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.bench_method_extra_kwargs</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_result_path"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.bench_result_path</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_case_n"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.bench_test_case_n</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.bench_test_round"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.bench_test_round</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.Config"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.Config</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.components.benchmark.conf.BenchmarkSettings.Config.env_prefix"><code class="docutils literal notranslate"><span class="pre">BenchmarkSettings.Config.env_prefix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">示例</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-format">数据格式</a></li>
+<li><a class="reference internal" href="#run-benchmark">运行基准测试</a></li>
+<li><a class="reference internal" href="#show-result">显示结果</a></li>
+<li><a class="reference internal" href="#related-paper">相关论文</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="catalog.html"
+                          title="上一章">研究</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="dev.html"
+                          title="下一章">开发</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/research/benchmark.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="dev.html" title="开发"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="catalog.html" title="研究"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" >研究</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">基准测试</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

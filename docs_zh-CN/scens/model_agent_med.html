@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>医学模型代理 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    
+    <script src="../_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="通用模型助手" href="model_copilot_general.html" />
+    <link rel="prev" title="金融模型代理" href="model_agent_fin.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="model_copilot_general.html" title="通用模型助手"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="model_agent_fin.html" title="金融模型代理"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" accesskey="U">场景</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">医学模型代理</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="medical-model-agent">
+<span id="model-agent-med"></span><h1>医学模型代理<a class="headerlink" href="#medical-model-agent" title="Link to this heading">¶</a></h1>
+<section id="automated-medical-predtion-model-evolution">
+<h2><strong>🤖 自动化医疗预测模型演变</strong><a class="headerlink" href="#automated-medical-predtion-model-evolution" title="Link to this heading">¶</a></h2>
+<section id="background">
+<h3>📖 背景<a class="headerlink" href="#background" title="Link to this heading">¶</a></h3>
+<p>在此场景中，我们考虑从患者的ICU监测数据中进行风险预测的问题。我们使用公共EHR数据集 - MIMIC-III，并提取一个二分类任务以评估该框架。在此任务中，我们旨在预测患者是否会因其前12小时的ICU监测数据而遭受急性呼吸衰竭（ARF）。</p>
+</section>
+<section id="id1">
+<h3>🎥 <a class="reference external" href="https://rdagent.azurewebsites.net/dmm">演示</a><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <video width="600" controls>
+    <source src="https://rdagent.azurewebsites.net/media/1653542fc1b9fa14a306c35c1b1fc48288f980793f38abe82b023af9.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div></section>
+<section id="introduction">
+<h3>🌟 介绍<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h3>
+<p>在此场景中，我们的自动化系统提出假设，构建模型，实现代码，接收回测，并利用反馈。假设在这个持续的过程中被迭代。该系统旨在自动优化医疗预测的性能指标，从而通过自主研发找到优化的代码。</p>
+<p>以下是步骤的增强大纲：</p>
+<p><strong>步骤 1 : 假设生成 🔍</strong></p>
+<ul class="simple">
+<li><p>根据先前实验分析和领域专业知识生成和提出初步假设，并进行充分的推理和论证。</p></li>
+</ul>
+<p><strong>步骤2：模型创建 ✨</strong></p>
+<ul class="simple">
+<li><p>将假设转化为模型。</p></li>
+<li><p>开发、定义并实现机器学习模型，包括其名称、描述和公式。</p></li>
+</ul>
+<p><strong>步骤3：模型实施 👨‍💻</strong></p>
+<ul class="simple">
+<li><p>根据详细描述实现模型代码。</p></li>
+<li><p>像开发者一样迭代演进模型，确保准确性和效率。</p></li>
+</ul>
+<p><strong>步骤 4 : 使用 MIMIC-III 进行回测 📉</strong></p>
+<ul class="simple">
+<li><p>使用新开发的模型对从MIMIC-III提取的任务进行回测。</p></li>
+<li><p>评估模型在AUROC分数方面的有效性和性能。</p></li>
+</ul>
+<p><strong>步骤 5 : 反馈分析 🔍</strong></p>
+<ul class="simple">
+<li><p>分析回测结果以评估性能。</p></li>
+<li><p>结合反馈来优化假设并改进模型。</p></li>
+</ul>
+<p><strong>步骤 6 : 假设优化 ♻️</strong></p>
+<ul class="simple">
+<li><p>根据回测反馈优化假设。</p></li>
+<li><p>重复该过程以持续改进模型。</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h3>⚡ 快速开始<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h3>
+<p>请参考 <a class="reference internal" href="../installation_and_configuration.html"><span class="doc">安装与配置</span></a> 中的安装部分以准备您的系统依赖。</p>
+<p>您可以通过运行以下命令尝试我们的演示：</p>
+<ul>
+<li><p>🐍 创建一个 Conda 环境</p>
+<ul>
+<li><p>创建一个新的conda环境，使用Python（3.10和3.11在我们的CI中经过良好测试）：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>rdagent<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+</pre></div>
+</div>
+</li>
+<li><p>激活环境：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>rdagent
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>📦 安装RDAgent</p>
+<ul>
+<li><p>您可以从PyPI安装RDAgent包：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>rdagent
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>📬 请求PhysioNet账户</p>
+<ul>
+<li><p>申请`PhysioNet &lt;<a class="reference external" href="https://physionet.org/">https://physionet.org/</a>&gt;`_的账户。</p></li>
+<li><p>请求访问FIDDLE预处理数据：<a class="reference external" href="https://physionet.org/content/mimic-eicu-fiddle-feature/1.0.0/">FIDDLE数据集</a>。</p></li>
+<li><p>将您的用户名和密码放入`.env`。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; EOF  &gt;&gt; .env</span>
+<span class="s">DM_USERNAME=&lt;your_username&gt;</span>
+<span class="s">DM_PASSWORD=&lt;your_password&gt;</span>
+<span class="s">EOF</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>🚀 运行应用程序</p>
+<ul>
+<li><p>您可以使用以下命令直接运行应用程序：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>rdagent<span class="w"> </span>med_model
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="usage-of-modules">
+<h3>🛠️ 模块的使用<a class="headerlink" href="#usage-of-modules" title="Link to this heading">¶</a></h3>
+<ul class="simple" id="env-config">
+<li><p><strong>环境配置</strong></p></li>
+</ul>
+<p>可以在`.env`文件中设置以下环境变量，以自定义应用程序的行为：</p>
+<dl class="py class pydantic_settings">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">settings</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.app.data_mining.conf.</span></span><span class="sig-name descname"><span class="pre">MedBasePropSetting</span></span><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting" title="Link to this definition">¶</a></dt>
+<dd><p><details  class="autodoc_pydantic_collapsable_json">
+<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MedBasePropSetting&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;scen&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.data_mining.experiment.model_experiment.DMModelScenario&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scen&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;knowledge_base&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Knowledge Base&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;knowledge_base_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Knowledge Base Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;hypothesis_gen&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.data_mining.proposal.model_proposal.DMModelHypothesisGen&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hypothesis Gen&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;hypothesis2experiment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.data_mining.proposal.model_proposal.DMModelHypothesis2Experiment&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hypothesis2Experiment&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;coder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.data_mining.developer.model_coder.DMModelCoSTEER&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Coder&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;runner&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.data_mining.developer.model_runner.DMModelRunner&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Runner&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;summarizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.data_mining.developer.feedback.DMModelExperiment2Feedback&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Summarizer&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;evolving_n&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Evolving N&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Username&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Password&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details></p><dl class="field-list simple">
+<dt class="field-odd">配置<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_prefix</strong>: <em>str = DM_</em></p></li>
+<li><p><strong>protected_namespaces</strong>: <em>tuple = ()</em></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.coder">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.data_mining.developer.model_coder.DMModelCoSTEER'</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.coder" title="Link to this definition">¶</a></dt>
+<dd><p>编码器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.evolving_n">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evolving_n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.evolving_n" title="Link to this definition">¶</a></dt>
+<dd><p>进化次数</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.hypothesis2experiment">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hypothesis2experiment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.data_mining.proposal.model_proposal.DMModelHypothesis2Experiment'</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.hypothesis2experiment" title="Link to this definition">¶</a></dt>
+<dd><p>实验类的假设</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.hypothesis_gen">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hypothesis_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.data_mining.proposal.model_proposal.DMModelHypothesisGen'</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.hypothesis_gen" title="Link to this definition">¶</a></dt>
+<dd><p>假设生成类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.password">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.password" title="Link to this definition">¶</a></dt>
+<dd><p>Physionet账户密码</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.runner">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">runner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.data_mining.developer.model_runner.DMModelRunner'</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.runner" title="Link to this definition">¶</a></dt>
+<dd><p>运行器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.scen">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.data_mining.experiment.model_experiment.DMModelScenario'</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.scen" title="Link to this definition">¶</a></dt>
+<dd><p>数据挖掘模型的场景类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.summarizer">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">summarizer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.data_mining.developer.feedback.DMModelExperiment2Feedback'</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.summarizer" title="Link to this definition">¶</a></dt>
+<dd><p>总结类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.data_mining.conf.MedBasePropSetting.username">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rdagent.app.data_mining.conf.MedBasePropSetting.username" title="Link to this definition">¶</a></dt>
+<dd><p>Physionet账户用户名</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">医学模型代理</a><ul>
+<li><a class="reference internal" href="#automated-medical-predtion-model-evolution"><strong>🤖 自动化医疗预测模型演变</strong></a><ul>
+<li><a class="reference internal" href="#background">📖 背景</a></li>
+<li><a class="reference internal" href="#id1">🎥 演示</a></li>
+<li><a class="reference internal" href="#introduction">🌟 介绍</a></li>
+<li><a class="reference internal" href="#quick-start">⚡ 快速开始</a></li>
+<li><a class="reference internal" href="#usage-of-modules">🛠️ 模块的使用</a><ul>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.coder"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.coder</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.evolving_n"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.evolving_n</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.hypothesis2experiment"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.hypothesis2experiment</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.hypothesis_gen"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.hypothesis_gen</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.password"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.password</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.runner"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.runner</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.scen"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.scen</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.summarizer"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.summarizer</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.data_mining.conf.MedBasePropSetting.username"><code class="docutils literal notranslate"><span class="pre">MedBasePropSetting.username</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="model_agent_fin.html"
+                          title="上一章">金融模型代理</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="model_copilot_general.html"
+                          title="下一章">通用模型助手</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scens/model_agent_med.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="model_copilot_general.html" title="通用模型助手"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="model_agent_fin.html" title="金融模型代理"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" >场景</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">医学模型代理</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

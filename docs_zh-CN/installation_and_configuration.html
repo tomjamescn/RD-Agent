@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>安装与配置 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    
+    <script src="_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="场景" href="scens/catalog.html" />
+    <link rel="prev" title="介绍" href="introduction.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="scens/catalog.html" title="场景"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="介绍"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">安装与配置</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="installation-and-configuration">
+<h1>安装与配置<a class="headerlink" href="#installation-and-configuration" title="Link to this heading">¶</a></h1>
+<section id="installation">
+<h2>安装<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p><strong>安装 RDAgent</strong>：针对不同场景</p>
+<ul class="simple">
+<li><p>对于普通用户：请使用 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">rdagent</span></code> 安装 RDAgent</p></li>
+<li><p>对于开发用户：<a class="reference external" href="development.html">查看开发</a></p></li>
+</ul>
+<p><strong>安装 Docker</strong>：RDAgent 旨在用于研究和开发，像人类研究员和开发者一样。它可以在各种环境中编写和运行代码，主要使用 Docker 进行代码执行。这使得其余的依赖保持简单。用户必须确保在尝试大多数场景之前已安装 Docker。请参考 <a class="reference external" href="https://docs.docker.com/engine/install/">官方 🐳Docker 页面</a> 获取安装说明。确保当前用户可以 <strong>不使用 sudo</strong> 运行 Docker 命令。您可以通过执行 <cite>docker run hello-world</cite> 来验证这一点。</p>
+</section>
+<section id="litellm-backend-configuration">
+<h2>LiteLLM 后端配置<a class="headerlink" href="#litellm-backend-configuration" title="Link to this heading">¶</a></h2>
+<p>请在项目的根目录中创建一个 <cite>.env</cite> 文件并添加环境变量。</p>
+<p>以下是通过 LiteLLM 使用 OpenAI 的 gpt-4o 的示例配置。</p>
+<blockquote>
+<div><div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="na">BACKEND</span><span class="o">=</span><span class="s">rdagent.oai.backend.LiteLLMAPIBackend</span>
+<span class="c1"># It can be modified to any model supported by LiteLLM.</span>
+<span class="na">CHAT_MODEL</span><span class="o">=</span><span class="s">gpt-4o</span>
+<span class="na">EMBEDDING_MODEL</span><span class="o">=</span><span class="s">text-embedding-3-small</span>
+<span class="c1"># The backend api_key fully follows the convention of litellm.</span>
+<span class="na">OPENAI_API_KEY</span><span class="o">=</span><span class="s">&lt;replace_with_your_openai_api_key&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>必要的参数包括：</p>
+<ul class="simple">
+<li><p><cite>BACKEND</cite>：要使用的后端。默认值为 <cite>rdagent.oai.backend.DeprecBackend</cite>。要使用 LiteLLM 后端，请将其设置为 <cite>rdagent.oai.backend.LiteLLMAPIBackend</cite>。</p></li>
+<li><p><cite>CHAT_MODEL</cite>：聊天模型的模型名称。</p></li>
+<li><p><cite>EMBEDDING_MODEL</cite>：嵌入模型的模型名称。</p></li>
+</ul>
+<p>The <cite>CHAT_MODEL</cite> and <cite>EMBEDDING_MODEL</cite> parameters will be passed into LiteLLM's completion function.</p>
+<p>因此，在使用不同提供商提供的模型时，请首先查看 LiteLLM 的接口配置。模型名称必须与 LiteLLM 允许的名称匹配。</p>
+<p>此外，您需要为相应的模型提供商设置额外参数，参数名称必须与 LiteLLM 所需的名称一致。</p>
+<p>例如，如果您使用 DeepSeek 模型，则需要设置如下：</p>
+<blockquote>
+<div><div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="c1"># For some models LiteLLM requires a prefix to the model name.</span>
+<span class="na">CHAT_MODEL</span><span class="o">=</span><span class="s">deepseek/deepseek-chat</span>
+<span class="na">DEEPSEEK_API_KEY</span><span class="o">=</span><span class="s">&lt;replace_with_your_deepseek_api_key&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>有关 LiteLLM 要求的更多详细信息，请参考 <a class="reference external" href="https://docs.litellm.ai/docs">官方 LiteLLM 文档</a>.</p>
+</section>
+<section id="configuration-deprecated">
+<h2>配置（已弃用）<a class="headerlink" href="#configuration-deprecated" title="Link to this heading">¶</a></h2>
+<p>要运行该应用程序，请在项目的根目录中创建一个 <cite>.env</cite> 文件并根据您的要求添加环境变量。</p>
+<p>使用 OpenAI API 的用户的标准配置选项在 <cite>.env.example</cite> 文件中提供。</p>
+<p>这里有一些其他可以使用的配置选项：</p>
+<section id="openai-api">
+<h3>OpenAI API<a class="headerlink" href="#openai-api" title="Link to this heading">¶</a></h3>
+<p>这是使用 OpenAI API 的用户的标准配置。</p>
+<blockquote>
+<div><div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="na">OPENAI_API_KEY</span><span class="o">=</span><span class="s">&lt;your_api_key&gt;</span>
+<span class="na">EMBEDDING_MODEL</span><span class="o">=</span><span class="s">text-embedding-3-small</span>
+<span class="na">CHAT_MODEL</span><span class="o">=</span><span class="s">gpt-4-turbo</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="azure-openai">
+<h3>Azure OpenAI<a class="headerlink" href="#azure-openai" title="Link to this heading">¶</a></h3>
+<p>以下环境变量是使用 OpenAI API 的用户的标准配置选项。</p>
+<blockquote>
+<div><div class="highlight-Properties notranslate"><div class="highlight"><pre><span></span><span class="na">USE_AZURE</span><span class="o">=</span><span class="s">True</span>
+
+<span class="na">EMBEDDING_OPENAI_API_KEY</span><span class="o">=</span><span class="s">&lt;replace_with_your_azure_openai_api_key&gt;</span>
+<span class="na">EMBEDDING_AZURE_API_BASE</span><span class="o">=</span><span class="w">  </span><span class="s"># The endpoint for the Azure OpenAI API.</span>
+<span class="na">EMBEDDING_AZURE_API_VERSION</span><span class="o">=</span><span class="w">  </span><span class="s"># The version of the Azure OpenAI API.</span>
+<span class="na">EMBEDDING_MODEL</span><span class="o">=</span><span class="s">text-embedding-3-small</span>
+
+<span class="na">CHAT_OPENAI_API_KEY</span><span class="o">=</span><span class="s">&lt;replace_with_your_azure_openai_api_key&gt;</span>
+<span class="na">CHAT_AZURE_API_BASE</span><span class="o">=</span><span class="w">  </span><span class="s"># The endpoint for the Azure OpenAI API.</span>
+<span class="na">CHAT_AZURE_API_VERSION</span><span class="o">=</span><span class="w">  </span><span class="s"># The version of the Azure OpenAI API.</span>
+<span class="na">CHAT_MODEL</span><span class="o">=</span><span class="w">  </span><span class="s"># The model name of the Azure OpenAI API.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="use-azure-token-provider">
+<h3>使用 Azure 令牌提供者<a class="headerlink" href="#use-azure-token-provider" title="Link to this heading">¶</a></h3>
+<p>如果您使用 Azure 令牌提供者，则需要将 <cite>CHAT_USE_AZURE_TOKEN_PROVIDER</cite> 和 <cite>EMBEDDING_USE_AZURE_TOKEN_PROVIDER</cite> 环境变量设置为 <cite>True</cite>。然后使用 <a class="reference external" href="installation_and_configuration.html#azure-openai">Azure 配置部分</a> 中提供的环境变量。</p>
+<p>☁️ Azure 配置 - 安装 Azure CLI：</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">`sh</span>
+<span class="pre">curl</span> <span class="pre">-L</span> <span class="pre">https://aka.ms/InstallAzureCli</span> <span class="pre">|</span> <span class="pre">bash</span>
+<span class="pre">`</span></code></p>
+</div></blockquote>
+<ul>
+<li><p>登录到 Azure：</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">`sh</span>
+<span class="pre">az</span> <span class="pre">login</span> <span class="pre">--use-device-code</span>
+<span class="pre">`</span></code></p>
+</div></blockquote>
+</li>
+<li><p><cite>exit</cite> 并重新登录到您的环境（此步骤可能不是必需的）。</p></li>
+</ul>
+</section>
+<section id="configuration-list">
+<h3>配置列表<a class="headerlink" href="#configuration-list" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>OpenAI API 设置</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>配置选项</p></th>
+<th class="head"><p>含义</p></th>
+<th class="head"><p>默认值</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>OPENAI_API_KEY</p></td>
+<td><p>聊天和嵌入模型的 API 密钥</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMBEDDING_OPENAI_API_KEY</p></td>
+<td><p>使用不同的API密钥用于嵌入模型</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-even"><td><p>CHAT_OPENAI_API_KEY</p></td>
+<td><p>设置为使用不同的API密钥用于聊天模型</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMBEDDING_MODEL</p></td>
+<td><p>嵌入模型的名称</p></td>
+<td><p>text-embedding-3-small</p></td>
+</tr>
+<tr class="row-even"><td><p>CHAT_MODEL</p></td>
+<td><p>聊天模型的名称</p></td>
+<td><p>gpt-4-turbo</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMBEDDING_AZURE_API_BASE</p></td>
+<td><p>Azure OpenAI API的基础URL</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-even"><td><p>EMBEDDING_AZURE_API_VERSION</p></td>
+<td><p>Azure OpenAI API的版本</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-odd"><td><p>CHAT_AZURE_API_BASE</p></td>
+<td><p>Azure OpenAI API的基础URL</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-even"><td><p>CHAT_AZURE_API_VERSION</p></td>
+<td><p>Azure OpenAI API的版本</p></td>
+<td><p>无</p></td>
+</tr>
+<tr class="row-odd"><td><p>USE_AZURE</p></td>
+<td><p>如果您正在使用Azure OpenAI则为真</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>CHAT_USE_AZURE_TOKEN_PROVIDER</p></td>
+<td><p>如果您在聊天模型中使用Azure令牌提供者则为真</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>EMBEDDING_USE_AZURE_TOKEN_PROVIDER</p></td>
+<td><p>如果您在嵌入模型中使用 Azure 令牌提供程序，则为真</p></td>
+<td><p>False</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>全局设置</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>配置选项</p></th>
+<th class="head"><p>含义</p></th>
+<th class="head"><p>默认值</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>max_retry</p></td>
+<td><p>最大重试次数</p></td>
+<td><p>10</p></td>
+</tr>
+<tr class="row-odd"><td><p>retry_wait_seconds</p></td>
+<td><p>重试前等待的秒数</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>log_trace_path</p></td>
+<td rowspan="2"><p>日志跟踪文件的路径</p></td>
+<td rowspan="2"><p>无</p></td>
+</tr>
+<tr class="row-odd"></tr>
+<tr class="row-even"><td rowspan="2"><p>log_llm_chat_content</p></td>
+<td rowspan="2"><p>指示是否记录聊天内容的标志</p></td>
+<td rowspan="2"><p>真</p></td>
+</tr>
+<tr class="row-odd"></tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>缓存设置</p></li>
+</ul>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>配置选项</p></th>
+<th class="head"><p>含义</p></th>
+<th class="head"><p>默认值</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dump_chat_cache</p></td>
+<td><p>指示是否转储聊天缓存的标志</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>dump_embedding_cache</p></td>
+<td><p>指示是否转储嵌入缓存的标志</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>use_chat_cache</p></td>
+<td><p>指示是否使用聊天缓存的标志</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>使用嵌入缓存</p></td>
+<td><p>指示是否使用嵌入缓存的标志</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>提示缓存路径</p></td>
+<td><p>提示缓存的路径</p></td>
+<td><p>./prompt_cache.db</p></td>
+</tr>
+<tr class="row-odd"><td><p>最大过去消息包含</p></td>
+<td><p>要包含的最大过去消息数量</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="loading-configuration">
+<h3>加载配置<a class="headerlink" href="#loading-configuration" title="Link to this heading">¶</a></h3>
+<p>为了用户的方便，我们提供了一个名为 <cite>rdagent</cite> 的CLI接口，它会自动运行 <cite>load_dotenv()</cite> 从 <cite>.env</cite> 文件加载环境变量。然而，其他脚本默认情况下并未启用此功能。我们建议用户按照以下步骤加载环境：</p>
+<ul>
+<li><dl>
+<dt>⚙️ 环境配置</dt><dd><ul>
+<li><dl class="simple">
+<dt>将 <cite>.env</cite> 文件放置在与 <cite>.env.example</cite> 文件相同的目录中。</dt><dd><ul class="simple">
+<li><p><cite>.env.example</cite> 文件包含使用 OpenAI API 所需的环境变量（请注意，<cite>.env.example</cite> 是示例文件，<cite>.env</cite> 是最终将使用的文件。）</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>导出 .env 文件中的每个变量：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="k">$(</span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;^#&#39;</span><span class="w"> </span>.env<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="k">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>如果您想更改默认环境变量，可以参考上述配置并编辑 <cite>.env</cite> 文件。</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">安装与配置</a><ul>
+<li><a class="reference internal" href="#installation">安装</a></li>
+<li><a class="reference internal" href="#litellm-backend-configuration">LiteLLM 后端配置</a></li>
+<li><a class="reference internal" href="#configuration-deprecated">配置（已弃用）</a><ul>
+<li><a class="reference internal" href="#openai-api">OpenAI API</a></li>
+<li><a class="reference internal" href="#azure-openai">Azure OpenAI</a></li>
+<li><a class="reference internal" href="#use-azure-token-provider">使用 Azure 令牌提供者</a></li>
+<li><a class="reference internal" href="#configuration-list">配置列表</a></li>
+<li><a class="reference internal" href="#loading-configuration">加载配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="introduction.html"
+                          title="上一章">介绍</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="scens/catalog.html"
+                          title="下一章">场景</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/installation_and_configuration.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="scens/catalog.html" title="场景"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="介绍"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">安装与配置</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

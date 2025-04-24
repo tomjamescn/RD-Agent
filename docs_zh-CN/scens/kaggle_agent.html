@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Kaggle代理 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    
+    <script src="../_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="框架设计与组件" href="../project_framework_introduction.html" />
+    <link rel="prev" title="通用模型助手" href="model_copilot_general.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="../project_framework_introduction.html" title="框架设计与组件"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="model_copilot_general.html" title="通用模型助手"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" accesskey="U">场景</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Kaggle代理</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="kaggle-agent">
+<span id="id1"></span><h1>Kaggle代理<a class="headerlink" href="#kaggle-agent" title="Link to this heading">¶</a></h1>
+<section id="automated-feature-engineering-model-tuning-evolution">
+<h2><strong>🤖 自动特征工程与模型调优演变</strong><a class="headerlink" href="#automated-feature-engineering-model-tuning-evolution" title="Link to this heading">¶</a></h2>
+<section id="design">
+<h3>🎨 设计<a class="headerlink" href="#design" title="Link to this heading">¶</a></h3>
+<img alt="Kaggle代理的设计" class="align-center" src="../_images/kaggle_design.png" />
+</section>
+<section id="background">
+<h3>📖 背景<a class="headerlink" href="#background" title="Link to this heading">¶</a></h3>
+<p>在数据科学竞赛的领域中，Kaggle作为最终的竞技场，数据爱好者利用算法的力量来应对现实世界的挑战。Kaggle代理作为一个关键工具，使参与者能够无缝集成尖端模型和数据集，将原始数据转化为可操作的洞察。</p>
+<p>通过利用**Kaggle代理**，数据科学家可以创造创新解决方案，不仅揭示隐藏的模式，还推动预测准确性和模型鲁棒性的重大进展。</p>
+</section>
+<section id="introduction">
+<h3>🌟 介绍<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h3>
+<p>在这种情况下，我们的自动化系统提出假设，选择行动，实施代码，进行验证，并在持续的迭代过程中利用反馈。</p>
+<p>目标是在验证集或Kaggle排行榜中自动优化性能指标，最终通过自主研究和开发发现最有效的特征和模型。</p>
+<p>以下是步骤的增强大纲：</p>
+<p><strong>步骤 1 : 假设生成 🔍</strong></p>
+<ul class="simple">
+<li><p>基于之前实验分析和领域专业知识生成并提出初步假设，附上充分的推理和金融依据。</p></li>
+</ul>
+<p><strong>步骤2：实验创建 ✨</strong></p>
+<ul class="simple">
+<li><p>将假设转化为任务。</p></li>
+<li><p>在特征工程或模型调优中选择一个具体行动。</p></li>
+<li><p>开发、定义并实现一个新特征或模型，包括其名称、描述和公式。</p></li>
+</ul>
+<p><strong>步骤 3 : 模型/特征实现 👨‍💻</strong></p>
+<ul class="simple">
+<li><p>根据详细描述实现模型代码。</p></li>
+<li><p>像开发者一样迭代演进模型，确保准确性和效率。</p></li>
+</ul>
+<p><strong>步骤 4 : 在测试集或Kaggle上的验证 📉</strong></p>
+<ul class="simple">
+<li><p>使用测试集或Kaggle数据集验证新开发的模型。</p></li>
+<li><p>根据验证结果评估模型的有效性和性能。</p></li>
+</ul>
+<p><strong>步骤 5: 反馈分析 🔍</strong></p>
+<ul class="simple">
+<li><p>分析验证结果以评估性能。</p></li>
+<li><p>利用洞察力来完善假设并增强模型。</p></li>
+</ul>
+<p><strong>步骤 6: 假设完善 ♻️</strong></p>
+<ul class="simple">
+<li><p>根据验证反馈调整假设。</p></li>
+<li><p>迭代该过程以持续改进模型。</p></li>
+</ul>
+</section>
+<section id="example-guide">
+<h3>🧭 示例指南<a class="headerlink" href="#example-guide" title="Link to this heading">¶</a></h3>
+<ul>
+<li><p>🔧 <strong>设置RD-Agent环境</strong></p>
+<ul class="simple">
+<li><p>在开始之前，请确保您已安装RD-Agent并正确配置RD-Agent环境。如果您想了解如何安装和配置RD-Agent，请参考`文档 &lt;../installation_and_configuration.html&gt;`_。</p></li>
+</ul>
+</li>
+<li><p>🔨 <strong>配置Kaggle API</strong></p>
+<ul>
+<li><p>在`Kaggle &lt;<a class="reference external" href="https://www.kaggle.com/">https://www.kaggle.com/</a>&gt;`_网站上注册并登录。</p></li>
+<li><p>点击头像（通常在页面的右上角）-&gt; <code class="docutils literal notranslate"><span class="pre">设置</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">创建新令牌</span></code>，将下载一个名为``kaggle.json``的文件。</p></li>
+<li><p>将``kaggle.json``移动到``~/.config/kaggle/``</p></li>
+<li><p>修改``kaggle.json``文件的权限。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.config/kaggle/kaggle.json
+</pre></div>
+</div>
+</li>
+<li><p>有关Kaggle API设置的更多信息，请参阅`Kaggle API &lt;<a class="reference external" href="https://github.com/Kaggle/kaggle-api">https://github.com/Kaggle/kaggle-api</a>&gt;`_。</p></li>
+</ul>
+</li>
+<li><p>🔩 <strong>在.env文件中设置环境变量</strong></p>
+<ul class="simple">
+<li><p>确定数据将存储的路径并将其添加到``.env``文件中。</p></li>
+</ul>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dotenv<span class="w"> </span><span class="nb">set</span><span class="w"> </span>KG_LOCAL_DATA_PATH<span class="w"> </span>&lt;your<span class="w"> </span><span class="nb">local</span><span class="w"> </span>directory&gt;/kaggle_data
+</pre></div>
+</div>
+</li>
+<li><p>📥 <strong>下载竞赛数据</strong></p>
+<ul>
+<li><p>Kaggle竞赛数据包含两个部分：竞赛描述文件（json文件）和竞赛数据集（zip文件）。</p>
+<ul>
+<li><p><strong>如何获取竞赛描述文件</strong></p>
+<ul>
+<li><p><em>手动下载（一般用户建议）：</em></p>
+<ul>
+<li><p>提前下载准备好的竞赛描述文件，并将其提取到指定目录。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/SunsetWolf/rdagent_resource/releases/download/kaggle_data/kaggle_data.zip
+unzip<span class="w"> </span>kaggle_data.zip<span class="w"> </span>-d<span class="w"> </span>&lt;your<span class="w"> </span><span class="nb">local</span><span class="w"> </span>directory&gt;/kaggle_data
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p><em>自动下载（开发者建议）：</em></p>
+<ul>
+<li><p>或者，您可以选择在运行程序时自动下载竞赛描述文件，但这需要安装``chromedriver``，如下所示：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># install chrome</span>
+wget<span class="w"> </span>https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>./google-chrome-stable_current_amd64.deb
+google-chrome<span class="w"> </span>--version
+
+<span class="c1"># install chromedriver</span>
+wget<span class="w"> </span><span class="s2">&quot;https://storage.googleapis.com/chrome-for-testing-public/</span><span class="k">$(</span>google-chrome<span class="w"> </span>--version<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oP<span class="w"> </span><span class="s1">&#39;\d+\.\d+\.\d+\.\d+&#39;</span><span class="k">)</span><span class="s2">/linux64/chromedriver-linux64.zip&quot;</span>
+unzip<span class="w"> </span>chromedriver-linux64.zip
+<span class="nb">cd</span><span class="w"> </span>chromedriver-linux64
+sudo<span class="w"> </span>mv<span class="w"> </span>chromedriver<span class="w"> </span>/usr/local/bin
+sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/usr/local/bin/chromedriver
+chromedriver<span class="w"> </span>--version
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>如何获取竞赛数据集</strong></p>
+<ul class="simple">
+<li><p>竞赛数据集在程序运行时会自动下载并提取。如果zip文件存在，将跳过下载，如果解压文件夹存在，将跳过解压。</p></li>
+</ul>
+</li>
+<li><p><strong>正确的目录结构（以下是id为sf-crime的竞赛数据示例）</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>kaggle_data
+└── zip_files
+| └── sf-crime.zip
+├── sf-crime.json
+└── sf-crime
+  └── ...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">kaggle_data/zip_files/sf-crime.zip:</span></code> 从Kaggle网站下载的竞赛数据集zip文件。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kaggle_data/sf-crime.json:</span></code> 竞赛描述文件。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kaggle_data/sf-crime:</span></code> 用于解压竞赛数据集的目标文件夹。</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>🗳️ <strong>加入竞赛</strong></p>
+<ul class="simple">
+<li><p>如果您的Kaggle API账户尚未加入任何竞赛，您需要在运行程序之前加入竞赛。</p>
+<ul>
+<li><p>在竞赛详情页面的底部，您可以找到``加入竞赛``按钮，点击它并选择``我理解并接受``以加入竞赛。</p></li>
+<li><p>在下面的**可用竞赛列表**中，您可以跳转到竞赛详情页面。</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>🚀 <strong>运行应用程序</strong></p>
+<ul>
+<li><p>您可以使用以下命令直接运行应用程序：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>rdagent<span class="w"> </span>kaggle<span class="w"> </span>--competition<span class="w"> </span>&lt;Competition<span class="w"> </span>ID&gt;
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>📤 <strong>自动或手动提交结果</strong></p>
+<ul>
+<li><p>如果自动提交：您需要在``.env``文件中将``KG_AUTO_SUBMIT``设置为``true``。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>dotenv<span class="w"> </span><span class="nb">set</span><span class="w"> </span>KG_AUTO_SUBMIT<span class="w"> </span><span class="nb">true</span>
+</pre></div>
+</div>
+</li>
+<li><p>否则：您可以从用户界面下载预测结果并手动提交。有关更多详细信息，请参阅 <a class="reference internal" href="../ui.html"><span class="doc">用户界面指南</span></a>。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="competition-list-available">
+<h3>📋 竞赛名单可用<a class="headerlink" href="#competition-list-available" title="Link to this heading">¶</a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>索引</strong></p></th>
+<th class="head"><p><strong>比赛名称</strong></p></th>
+<th class="head"><p><strong>任务</strong></p></th>
+<th class="head"><p><strong>模态</strong></p></th>
+<th class="head"><p><strong>ID</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>01</p></td>
+<td><p>媒体宣传活动成本数据集</p></td>
+<td><p>回归分析</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s3e11/data">playground-series-s3e11</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>02</p></td>
+<td><p>野生蓝莓产量数据集</p></td>
+<td><p>回归分析</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s3e14/data">playground-series-s3e14</a></p></td>
+</tr>
+<tr class="row-even"><td><p>03</p></td>
+<td><p>蟹龄数据集</p></td>
+<td><p>回归分析</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s3e16/data">playground-series-s3e16</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>04</p></td>
+<td><p>洪水预测数据集</p></td>
+<td><p>回归分析</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s4e5/data">playground-series-s4e5</a></p></td>
+</tr>
+<tr class="row-even"><td><p>05</p></td>
+<td><p>二手车价格数据集</p></td>
+<td><p>回归分析</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s4e9/data">playground-series-s4e9</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>06</p></td>
+<td><p>肝硬化结果数据集</p></td>
+<td><p>多分类</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s3e26/data">playground-series-s3e26</a></p></td>
+</tr>
+<tr class="row-even"><td><p>07</p></td>
+<td><p>旧金山犯罪分类</p></td>
+<td><p>多分类</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/sf-crime/data">sf-crime</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>08</p></td>
+<td><p>有毒蘑菇数据集</p></td>
+<td><p>分类</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/playground-series-s4e8/data">playground-series-s4e8</a></p></td>
+</tr>
+<tr class="row-even"><td><p>09</p></td>
+<td><p>宇宙飞船泰坦尼克号</p></td>
+<td><p>分类</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/spaceship-titanic/data">spaceship-titanic</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>森林覆盖类型预测</p></td>
+<td><p>分类</p></td>
+<td><p>表格的</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/forest-cover-type-prediction/data">森林覆盖类型预测</a></p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>数字识别器</p></td>
+<td><p>分类</p></td>
+<td><p>图像</p></td>
+<td><p><a class="reference external" href="https://www.kaggle.com/competitions/digit-recognizer">数字识别器</a></p></td>
+</tr>
+<tr class="row-odd"><td colspan="5"><p>待续 ...</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="customize-one-template-for-a-new-competition">
+<h3>🎨 为新竞赛定制一个模板<a class="headerlink" href="#customize-one-template-for-a-new-competition" title="Link to this heading">¶</a></h3>
+<p>为了方便RD-Agent生成竞赛代码，我们指定了一个竞赛代码结构：</p>
+<img alt="Kaggle代码模板设计" class="align-center" src="../_images/kaggle_template.png" />
+<ul class="simple">
+<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>特征目录**包含特征工程代码。通常不需要修改。</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>模型目录**包含模型代码。select_xx.py用于根据不同模型选择不同特征。model_xx.py是不同模型的基本代码。通常只需调整一些初始参数。</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>fea_share_preprocess.py**是不同模型共享的一些基本预处理代码。这里的定制程度较高，但需要保留preprocess_script()函数，该函数将在train.py中被调用。</p></li>
+<li><p><a href="#id1"><span class="problematic" id="id2">**</span></a>train.py**是主代码，连接所有代码，也是最终执行时调用的代码。</p></li>
+</ul>
+<p><strong>我们将很快提供一个自动/半自动模板生成工具。</strong> 如果您现在想尝试不同的竞赛，可以参考我们当前的模板结构和内容来编写新的模板。</p>
+</section>
+<section id="roadmap">
+<h3>🎯 路线图<a class="headerlink" href="#roadmap" title="Link to this heading">¶</a></h3>
+<p><strong>已完成：</strong></p>
+<ul class="simple">
+<li><p><strong>Kaggle项目架构设计</strong> ✅</p></li>
+<li><p><strong>RD-Agent与kaggle架构的集成</strong> ✅</p></li>
+</ul>
+<p><strong>进行中：</strong></p>
+<ul class="simple">
+<li><p><strong>模板自动生成</strong></p></li>
+<li><p><strong>基准优化</strong></p>
+<ul>
+<li><p><strong>在线基准</strong></p>
+<ul>
+<li><p><strong>RealML基准</strong></p>
+<ul>
+<li><p>持续集成</p></li>
+<li><p>自动在线提交</p></li>
+<li><p>批量评估</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>离线基准</strong></p>
+<ul>
+<li><p>MLE-基准</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="usage-of-modules">
+<h3>🛠️ 模块的使用<a class="headerlink" href="#usage-of-modules" title="Link to this heading">¶</a></h3>
+<ul class="simple" id="env-config">
+<li><p><strong>环境配置</strong></p></li>
+</ul>
+<p>可以在`.env`文件中设置以下环境变量，以自定义应用程序的行为：</p>
+<dl class="py class pydantic_settings">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">settings</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.app.kaggle.conf.</span></span><span class="sig-name descname"><span class="pre">KaggleBasePropSetting</span></span><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting" title="Link to this definition">¶</a></dt>
+<dd><p><details  class="autodoc_pydantic_collapsable_json">
+<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KaggleBasePropSetting&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;scen&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.experiment.scenario.KGScenario&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Scen&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;hypothesis_gen&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.proposal.proposal.KGHypothesisGen&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hypothesis Gen&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;hypothesis2experiment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.proposal.proposal.KGHypothesis2Experiment&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Hypothesis2Experiment&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;feature_coder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.developer.coder.KGFactorCoSTEER&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feature Coder&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;model_feature_selection_coder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.developer.coder.KGModelFeatureSelectionCoder&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Model Feature Selection Coder&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;model_coder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.developer.coder.KGModelCoSTEER&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Model Coder&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;feature_runner&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.developer.runner.KGFactorRunner&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Feature Runner&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;model_runner&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.developer.runner.KGModelRunner&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Model Runner&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;summarizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent.scenarios.kaggle.developer.feedback.KGExperiment2Feedback&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Summarizer&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;evolving_n&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Evolving N&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;competition&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Competition&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;template_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rdagent/scenarios/kaggle/experiment/templates&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Template Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;local_data_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Local Data Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;if_using_mle_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If Using Mle Data&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;auto_submit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Auto Submit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;knowledge_base&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Knowledge Base&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;if_action_choosing_based_on_UCB&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If Action Choosing Based On Ucb&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;domain_knowledge_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/data/userdata/share/kaggle/domain_knowledge&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Domain Knowledge Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;knowledge_base_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;kg_graph.pkl&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Knowledge Base Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;rag_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git_ignore_folder/kaggle_vector_base.pkl&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rag Path&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;if_using_vector_rag&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If Using Vector Rag&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;if_using_graph_rag&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;If Using Graph Rag&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;mini_case&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mini Case&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details></p><dl class="field-list simple">
+<dt class="field-odd">配置<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_prefix</strong>: <em>str = KG_</em></p></li>
+<li><p><strong>protected_namespaces</strong>: <em>tuple = ()</em></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.auto_submit">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">auto_submit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.auto_submit" title="Link to this definition">¶</a></dt>
+<dd><p>自动上传并提交每个实验结果到Kaggle平台</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.competition">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">competition</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.competition" title="Link to this definition">¶</a></dt>
+<dd><p>Kaggle竞赛名称，例如，'sf-crime'</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.domain_knowledge_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">domain_knowledge_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/data/userdata/share/kaggle/domain_knowledge'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.domain_knowledge_path" title="Link to this definition">¶</a></dt>
+<dd><p>存储领域知识文件的文件夹，格式为.case</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.evolving_n">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evolving_n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.evolving_n" title="Link to this definition">¶</a></dt>
+<dd><p>进化次数</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.feature_coder">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature_coder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.developer.coder.KGFactorCoSTEER'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.feature_coder" title="Link to this definition">¶</a></dt>
+<dd><p>特征编码器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.feature_runner">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feature_runner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.developer.runner.KGFactorRunner'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.feature_runner" title="Link to this definition">¶</a></dt>
+<dd><p>特征运行器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.hypothesis2experiment">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hypothesis2experiment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.proposal.proposal.KGHypothesis2Experiment'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.hypothesis2experiment" title="Link to this definition">¶</a></dt>
+<dd><p>实验类的假设</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.hypothesis_gen">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hypothesis_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.proposal.proposal.KGHypothesisGen'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.hypothesis_gen" title="Link to this definition">¶</a></dt>
+<dd><p>假设生成类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.if_action_choosing_based_on_UCB">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">if_action_choosing_based_on_UCB</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_action_choosing_based_on_UCB" title="Link to this definition">¶</a></dt>
+<dd><p>基于UCB算法的决策机制启用</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_graph_rag">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">if_using_graph_rag</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_graph_rag" title="Link to this definition">¶</a></dt>
+<dd><p>启用高级图形基础RAG</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_mle_data">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">if_using_mle_data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_mle_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_vector_rag">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">if_using_vector_rag</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_vector_rag" title="Link to this definition">¶</a></dt>
+<dd><p>启用基本向量基础RAG</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.knowledge_base">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">knowledge_base</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.knowledge_base" title="Link to this definition">¶</a></dt>
+<dd><p>知识库类，当启用高级图形基础RAG时使用'KGKnowledgeGraph'，否则为空。</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.knowledge_base_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">knowledge_base_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'kg_graph.pkl'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.knowledge_base_path" title="Link to this definition">¶</a></dt>
+<dd><p>基于图形的RAG的高级版本</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.local_data_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">local_data_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.local_data_path" title="Link to this definition">¶</a></dt>
+<dd><p>存储Kaggle竞赛数据的文件夹</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.mini_case">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mini_case</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.mini_case" title="Link to this definition">¶</a></dt>
+<dd><p>启用实验的迷你案例研究</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.model_coder">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model_coder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.developer.coder.KGModelCoSTEER'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.model_coder" title="Link to this definition">¶</a></dt>
+<dd><p>模型编码器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.model_feature_selection_coder">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model_feature_selection_coder</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.developer.coder.KGModelFeatureSelectionCoder'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.model_feature_selection_coder" title="Link to this definition">¶</a></dt>
+<dd><p>模型特征选择编码器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.model_runner">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model_runner</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.developer.runner.KGModelRunner'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.model_runner" title="Link to this definition">¶</a></dt>
+<dd><p>模型运行器类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.rag_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rag_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'git_ignore_folder/kaggle_vector_base.pkl'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.rag_path" title="Link to this definition">¶</a></dt>
+<dd><p>基于向量的RAG基础版本</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.scen">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.experiment.scenario.KGScenario'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.scen" title="Link to this definition">¶</a></dt>
+<dd><p>数据挖掘模型的场景类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.summarizer">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">summarizer</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent.scenarios.kaggle.developer.feedback.KGExperiment2Feedback'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.summarizer" title="Link to this definition">¶</a></dt>
+<dd><p>总结类</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="rdagent.app.kaggle.conf.KaggleBasePropSetting.template_path">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">template_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'rdagent/scenarios/kaggle/experiment/templates'</span></em><a class="headerlink" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.template_path" title="Link to this definition">¶</a></dt>
+<dd><p>Kaggle竞赛基础模板路径</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_settings">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">settings</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.components.coder.factor_coder.config.</span></span><span class="sig-name descname"><span class="pre">FactorCoSTEERSettings</span></span></dt>
+<dd><p><details  class="autodoc_pydantic_collapsable_json">
+<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FactorCoSTEERSettings&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+<span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;coder_use_cache&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Coder Use Cache&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;max_loop&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Max Loop&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;fail_task_trial_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Fail Task Trial Limit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v1_query_former_trace_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V1 Query Former Trace Limit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v1_query_similar_success_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V1 Query Similar Success Limit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v2_query_component_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V2 Query Component Limit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v2_query_error_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V2 Query Error Limit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v2_query_former_trace_limit&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V2 Query Former Trace Limit&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v2_add_fail_attempt_to_latest_successful_execution&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V2 Add Fail Attempt To Latest Successful Execution&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v2_error_summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V2 Error Summary&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;v2_knowledge_sampler&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;V2 Knowledge Sampler&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;knowledge_base_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">         </span><span class="p">],</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Knowledge Base Path&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;new_knowledge_base_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;anyOf&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">               </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;null&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">         </span><span class="p">],</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;New Knowledge Base Path&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;max_seconds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Max Seconds&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;data_folder&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git_ignore_folder/factor_implementation_source_data&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Folder&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;data_folder_debug&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git_ignore_folder/factor_implementation_source_data_debug&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Data Folder Debug&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;simple_background&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Simple Background&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;file_based_execution_timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File Based Execution Timeout&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;select_method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;random&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Select Method&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;python_bin&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python Bin&quot;</span><span class="p">,</span>
+<span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">   </span><span class="p">},</span>
+<span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</details></p><dl class="field-list simple">
+<dt class="field-odd">配置<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>env_prefix</strong>: <em>str = FACTOR_CoSTEER_</em></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coder_use_cache</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em></dt>
+<dd><p>指示是否为编码器使用缓存</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">file_based_execution_timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">120</span></em></dt>
+<dd><p>每个因子实现执行的超时时间（秒）</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_loop</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em></dt>
+<dd><p>任务实现循环的最大数量</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000000</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">python_bin</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'python'</span></em></dt>
+<dd><p>Python 二进制文件的路径</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">select_method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'random'</span></em></dt>
+<dd><p>因子实现选择的方法</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">simple_background</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em></dt>
+<dd><p>是否使用简单的背景信息进行代码反馈</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Kaggle代理</a><ul>
+<li><a class="reference internal" href="#automated-feature-engineering-model-tuning-evolution"><strong>🤖 自动特征工程与模型调优演变</strong></a><ul>
+<li><a class="reference internal" href="#design">🎨 设计</a></li>
+<li><a class="reference internal" href="#background">📖 背景</a></li>
+<li><a class="reference internal" href="#introduction">🌟 介绍</a></li>
+<li><a class="reference internal" href="#example-guide">🧭 示例指南</a></li>
+<li><a class="reference internal" href="#competition-list-available">📋 竞赛名单可用</a></li>
+<li><a class="reference internal" href="#customize-one-template-for-a-new-competition">🎨 为新竞赛定制一个模板</a></li>
+<li><a class="reference internal" href="#roadmap">🎯 路线图</a></li>
+<li><a class="reference internal" href="#usage-of-modules">🛠️ 模块的使用</a><ul>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.auto_submit"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.auto_submit</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.competition"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.competition</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.domain_knowledge_path"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.domain_knowledge_path</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.evolving_n"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.evolving_n</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.feature_coder"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.feature_coder</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.feature_runner"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.feature_runner</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.hypothesis2experiment"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.hypothesis2experiment</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.hypothesis_gen"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.hypothesis_gen</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_action_choosing_based_on_UCB"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.if_action_choosing_based_on_UCB</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_graph_rag"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.if_using_graph_rag</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_mle_data"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.if_using_mle_data</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.if_using_vector_rag"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.if_using_vector_rag</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.knowledge_base"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.knowledge_base</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.knowledge_base_path"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.knowledge_base_path</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.local_data_path"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.local_data_path</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.mini_case"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.mini_case</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.model_coder"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.model_coder</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.model_feature_selection_coder"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.model_feature_selection_coder</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.model_runner"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.model_runner</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.rag_path"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.rag_path</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.scen"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.scen</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.summarizer"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.summarizer</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.app.kaggle.conf.KaggleBasePropSetting.template_path"><code class="docutils literal notranslate"><span class="pre">KaggleBasePropSetting.template_path</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="model_copilot_general.html"
+                          title="上一章">通用模型助手</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="../project_framework_introduction.html"
+                          title="下一章">框架设计与组件</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scens/kaggle_agent.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="../project_framework_introduction.html" title="框架设计与组件"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="model_copilot_general.html" title="通用模型助手"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" >场景</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Kaggle代理</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>开发 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    
+    <script src="../_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="开发中" href="../development.html" />
+    <link rel="prev" title="基准测试" href="benchmark.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="../development.html" title="开发中"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="benchmark.html" title="基准测试"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" accesskey="U">研究</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">开发</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="development">
+<h1>开发<a class="headerlink" href="#development" title="Link to this heading">¶</a></h1>
+<section id="related-paper">
+<h2>相关论文<a class="headerlink" href="#related-paper" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/2407.18690">面向自动数据中心开发的协作进化策略</a> Co-STEER 是一种解决数据中心开发（AD2）任务的方法，突出其主要挑战，这些挑战需要类似专家的实施（即，从实践中学习领域知识）和任务调度能力（例如，从更简单的任务开始以提高整体效率），这些领域在以往的工作中大多被忽视。我们的 Co-STEER 代理通过我们的进化策略增强其领域知识，并通过收集和利用领域特定的实践经验来改善其调度和实施技能。通过更好的调度，实施变得更快。同时，随着实施反馈变得更加详细，调度的准确性也提高。这两种能力通过实践反馈共同增长，从而实现协作进化过程。</p></li>
+</ul>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@misc</span><span class="p">{</span><span class="nl">yang2024collaborative</span><span class="p">,</span>
+<span class="w">    </span><span class="na">title</span><span class="p">=</span><span class="s">{Collaborative Evolving Strategy for Automatic Data-Centric Development}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">author</span><span class="p">=</span><span class="s">{Xu Yang and Haotian Chen and Wenjun Feng and Haoxue Wang and Zeqi Ye and Xinjie Shen and Xiao Yang and Shizhao Sun and Weiqing Liu and Jiang Bian}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">year</span><span class="p">=</span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">eprint</span><span class="p">=</span><span class="s">{2407.18690}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">archivePrefix</span><span class="p">=</span><span class="s">{arXiv}</span><span class="p">,</span>
+<span class="w">    </span><span class="na">primaryClass</span><span class="p">=</span><span class="s">{cs.AI}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="自动数据中心开发的协同演化策略" src="https://github.com/user-attachments/assets/75d9769b-0edd-4caf-9d45-57d1e577054b" />
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">开发</a><ul>
+<li><a class="reference internal" href="#related-paper">相关论文</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="benchmark.html"
+                          title="上一章">基准测试</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="../development.html"
+                          title="下一章">开发中</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/research/dev.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="../development.html" title="开发中"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="benchmark.html" title="基准测试"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" >研究</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">开发</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

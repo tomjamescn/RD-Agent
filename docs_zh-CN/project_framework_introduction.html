@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>框架设计与组件 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    
+    <script src="_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="用户界面" href="ui.html" />
+    <link rel="prev" title="Kaggle代理" href="scens/kaggle_agent.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="ui.html" title="用户界面"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="scens/kaggle_agent.html" title="Kaggle代理"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">框架设计与组件</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="framework-design-components">
+<h1>框架设计与组件<a class="headerlink" href="#framework-design-components" title="Link to this heading">¶</a></h1>
+<section id="framework-components">
+<h2>框架与组件<a class="headerlink" href="#framework-components" title="Link to this heading">¶</a></h2>
+<img alt="组件与特性级别" src="_images/Framework-RDAgent.png" />
+<p>上面的图像展示了RDAgent的整体框架。</p>
+<p>在数据挖掘专家的日常研发过程中，他们提出一个假设（例如，像RNN这样的模型结构可以捕捉时间序列数据中的模式），设计实验（例如，金融数据包含时间序列，我们可以在这种情况下验证假设），将实验实现为代码（例如，Pytorch模型结构），然后执行代码以获取反馈（例如，指标、损失曲线等）。专家们从反馈中学习，并在下一次迭代中进行改进。</p>
+<p>我们建立了一个基本的方法框架，持续提出假设、验证假设，并从现实世界获取反馈。这是第一个支持与现实世界验证链接的科学研究自动化框架。</p>
+<img alt="班级水平图表" src="https://github.com/user-attachments/assets/60cc2712-c32a-4492-a137-8aec59cdc66e" />
+<p>上图展示了主要类及其在对详细代码感兴趣的工作流程中的适配方式。</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">框架设计与组件</a><ul>
+<li><a class="reference internal" href="#framework-components">框架与组件</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="scens/kaggle_agent.html"
+                          title="上一章">Kaggle代理</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="ui.html"
+                          title="下一章">用户界面</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/project_framework_introduction.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="ui.html" title="用户界面"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="scens/kaggle_agent.html" title="Kaggle代理"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">框架设计与组件</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

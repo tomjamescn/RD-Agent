@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>通用模型助手 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+    
+    <script src="../_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Kaggle代理" href="kaggle_agent.html" />
+    <link rel="prev" title="医学模型代理" href="model_agent_med.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="kaggle_agent.html" title="Kaggle代理"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="model_agent_med.html" title="医学模型代理"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" accesskey="U">场景</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">通用模型助手</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="general-model-copilot">
+<span id="model-copilot-general"></span><h1>通用模型助手<a class="headerlink" href="#general-model-copilot" title="Link to this heading">¶</a></h1>
+<section id="automated-model-research-development-co-pilot">
+<h2><strong>🤖 自动化模型研究与开发助手</strong><a class="headerlink" href="#automated-model-research-development-co-pilot" title="Link to this heading">¶</a></h2>
+<section id="background">
+<h3>📖 背景<a class="headerlink" href="#background" title="Link to this heading">¶</a></h3>
+<p>在快速发展的人工智能领域，每年发表的学术论文数量激增。这些论文介绍了新的模型、技术和方法，可以显著推动技术的进步。然而，重现和实现这些模型可能是一项艰巨的任务，需要大量的时间和专业知识。研究人员常常面临从这些论文中提取关键信息并将其转换为可执行代码的挑战。这就是**通用模型助手**发挥作用的地方。</p>
+</section>
+<section id="id1">
+<h3>🎥 <a class="reference external" href="https://rdagent.azurewebsites.net/report_model">演示</a><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<div style="display: flex; justify-content: center; align-items: center;">
+  <video width="600" controls>
+    <source src="https://rdagent.azurewebsites.net/media/b35f904765b05099b0fcddbebe041a04f4d7bde239657e5fc24bf0cc.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div></section>
+<section id="introduction">
+<h3>🌟 介绍<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h3>
+<p>在这种情况下，我们的自动化系统提出假设，构建模型，实现代码，进行回测，并利用反馈进行持续迭代。该系统旨在自动优化来自Qlib库的性能指标，通过自主研究和开发找到最佳代码。</p>
+</section>
+<section id="model-r-d-copilot-scenario">
+<h3>模型研发助手场景<a class="headerlink" href="#model-r-d-copilot-scenario" title="Link to this heading">¶</a></h3>
+<p><strong>概述</strong></p>
+<p>该演示自动化了从学术论文中提取和迭代开发模型的过程，确保功能性和正确性。该场景通过阅读学术论文或其他来源自动开发PyTorch模型。它支持多种数据类型，包括表格数据、时间序列数据和图数据。主要工作流程涉及两个主要组件：读取器和编码器。</p>
+<p><strong>工作流程组件</strong></p>
+<ol class="arabic simple">
+<li><p><strong>读取器</strong> - 从学术论文或来源中解析并提取相关模型信息，包括架构、参数和实现细节。 - 使用大型语言模型将内容转换为结构化格式，以供编码器使用。</p></li>
+<li><p><strong>进化编码器</strong> - 将读取器中的结构化信息转换为可执行的PyTorch代码。 - 利用进化编码机制确保正确的张量形状，并通过示例输入张量进行验证。 - 迭代优化代码，以符合源材料的规范。</p></li>
+</ol>
+<p><strong>支持的数据类型</strong></p>
+<ul class="simple">
+<li><p><strong>表格数据：</strong> 具有行和列的结构化数据，例如电子表格或数据库。</p></li>
+<li><p><strong>时间序列数据：</strong> 按时间顺序索引的顺序数据点，适用于预测和时间模式识别。</p></li>
+<li><p><strong>图数据：</strong> 以节点和边结构化的数据，适合网络分析和关系任务。</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h3>⚡ 快速开始<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h3>
+<p>请参考 <a class="reference internal" href="../installation_and_configuration.html"><span class="doc">安装与配置</span></a> 中的安装部分以准备您的系统依赖。</p>
+<p>您可以通过运行以下命令尝试我们的演示：</p>
+<ul>
+<li><p>🐍 创建一个 Conda 环境</p>
+<ul>
+<li><p>创建一个新的conda环境，使用Python（3.10和3.11在我们的CI中经过良好测试）：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>rdagent<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.10
+</pre></div>
+</div>
+</li>
+<li><p>激活环境：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>rdagent
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>📦 安装RDAgent</p>
+<ul>
+<li><p>您可以从PyPI安装RDAgent包：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>rdagent
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>🚀 运行应用程序</p>
+<ul>
+<li><p>通过将论文上传到下面的目录，准备相关文件（pdf格式），并复制路径作为report_file_path。</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>rdagent/scenarios/general_model
+</pre></div>
+</div>
+</li>
+<li><p>在相同的虚拟环境中，在终端运行以下命令：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>rdagent<span class="w"> </span>general_model<span class="w"> </span>--report_file_path<span class="o">=</span>&lt;path_to_pdf_file&gt;
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">通用模型助手</a><ul>
+<li><a class="reference internal" href="#automated-model-research-development-co-pilot"><strong>🤖 自动化模型研究与开发助手</strong></a><ul>
+<li><a class="reference internal" href="#background">📖 背景</a></li>
+<li><a class="reference internal" href="#id1">🎥 演示</a></li>
+<li><a class="reference internal" href="#introduction">🌟 介绍</a></li>
+<li><a class="reference internal" href="#model-r-d-copilot-scenario">模型研发助手场景</a></li>
+<li><a class="reference internal" href="#quick-start">⚡ 快速开始</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="model_agent_med.html"
+                          title="上一章">医学模型代理</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="kaggle_agent.html"
+                          title="下一章">Kaggle代理</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/scens/model_copilot_general.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="kaggle_agent.html" title="Kaggle代理"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="model_agent_med.html" title="医学模型代理"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="catalog.html" >场景</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">通用模型助手</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>

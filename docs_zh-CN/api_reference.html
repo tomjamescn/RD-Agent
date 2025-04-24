@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API参考 &#8212; RDAgent v0.4.0 文档</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=2bf1fcf8" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    
+    <script src="_static/documentation_options.js?v=7ea6eefd"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/translations.js?v=beaddf03"></script>
+    
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="策略" href="policy.html" />
+    <link rel="prev" title="开发中" href="development.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             accesskey="I">索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="policy.html" title="策略"
+             accesskey="N">下一页</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="开发中"
+             accesskey="P">上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">API参考</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="api-reference">
+<h1>API参考<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h1>
+<p>在这里您可以找到所有 <code class="docutils literal notranslate"><span class="pre">RDAgent</span></code> 的接口。</p>
+<section id="rd-loop">
+<h2>RD 循环<a class="headerlink" href="#rd-loop" title="Link to this heading">¶</a></h2>
+<section id="module-rdagent.core.proposal">
+<span id="research"></span><h3>研究<a class="headerlink" href="#module-rdagent.core.proposal" title="Link to this heading">¶</a></h3>
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Hypothesis">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">Hypothesis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hypothesis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concise_reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concise_observation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concise_justification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concise_knowledge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.Hypothesis" title="Link to this definition">¶</a></dt>
+<dd><p>TODO: 我们可能有更好的名称。</p>
+<p>名称候选: - 信念</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.ExperimentFeedback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">ExperimentFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.ExperimentFeedback" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="rdagent.core.proposal.ExperimentFeedback.from_exception">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">e</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rdagent.core.proposal.ExperimentFeedback" title="rdagent.core.proposal.ExperimentFeedback"><span class="pre">ExperimentFeedback</span></a></span></span><a class="headerlink" href="#rdagent.core.proposal.ExperimentFeedback.from_exception" title="Link to this definition">¶</a></dt>
+<dd><p>从异常中创建反馈的便捷方法。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.HypothesisFeedback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">HypothesisFeedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis_evaluation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_hypothesis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reason</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decision</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.HypothesisFeedback" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Trace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">Trace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ASpecificScen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">knowledge_base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ASpecificKB</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.Trace" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Trace.get_sota_hypothesis_and_experiment">
+<span class="sig-name descname"><span class="pre">get_sota_hypothesis_and_experiment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rdagent.core.proposal.Hypothesis" title="rdagent.core.proposal.Hypothesis"><span class="pre">Hypothesis</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Experiment</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rdagent.core.proposal.Trace.get_sota_hypothesis_and_experiment" title="Link to this definition">¶</a></dt>
+<dd><p>访问最后的实验结果、子任务及相应的假设。</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.ExpGen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">ExpGen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.ExpGen" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="rdagent.core.proposal.ExpGen.gen">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rdagent.core.proposal.Trace" title="rdagent.core.proposal.Trace"><span class="pre">Trace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Experiment</span></span></span><a class="headerlink" href="#rdagent.core.proposal.ExpGen.gen" title="Link to this definition">¶</a></dt>
+<dd><p>根据轨迹生成实验。</p>
+<p><cite>ExpGen().gen()</cite> 的作用类似于</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ExpGen().gen() ==</span>
+<span class="n">Hypothesis2Experiment</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span>
+    <span class="n">HypothesisGen</span><span class="p">()</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.HypothesisGen">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">HypothesisGen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.HypothesisGen" title="Link to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="rdagent.core.proposal.HypothesisGen.gen">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rdagent.core.proposal.Trace" title="rdagent.core.proposal.Trace"><span class="pre">Trace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rdagent.core.proposal.Hypothesis" title="rdagent.core.proposal.Hypothesis"><span class="pre">Hypothesis</span></a></span></span><a class="headerlink" href="#rdagent.core.proposal.HypothesisGen.gen" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>变量 <cite>scenario_desc</cite> 的动机：</dt><dd><ul class="simple">
+<li><p>模拟数据科学家观察场景。</p></li>
+</ul>
+</dd>
+<dt>scenario_desc 可能包括：</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>数据观察：</dt><dd><ul>
+<li><p>原始或衍生</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>任务信息：</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Hypothesis2Experiment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">Hypothesis2Experiment</span></span><a class="headerlink" href="#rdagent.core.proposal.Hypothesis2Experiment" title="Link to this definition">¶</a></dt>
+<dd><p>[抽象描述 =&gt; 具体描述] =&gt; 代码实现卡</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Hypothesis2Experiment.convert">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hypothesis</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rdagent.core.proposal.Hypothesis" title="rdagent.core.proposal.Hypothesis"><span class="pre">Hypothesis</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rdagent.core.proposal.Trace" title="rdagent.core.proposal.Trace"><span class="pre">Trace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ASpecificExp</span></span></span><a class="headerlink" href="#rdagent.core.proposal.Hypothesis2Experiment.convert" title="Link to this definition">¶</a></dt>
+<dd><p>将想法提案与实现连接</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Experiment2Feedback">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rdagent.core.proposal.</span></span><span class="sig-name descname"><span class="pre">Experiment2Feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scenario</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rdagent.core.proposal.Experiment2Feedback" title="Link to this definition">¶</a></dt>
+<dd><p>&quot;从 <strong>执行</strong> 不同任务的实现中生成的对假设的反馈及其与先前表现的比较</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rdagent.core.proposal.Experiment2Feedback.generate_feedback">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_feedback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Experiment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rdagent.core.proposal.Trace" title="rdagent.core.proposal.Trace"><span class="pre">Trace</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rdagent.core.proposal.ExperimentFeedback" title="rdagent.core.proposal.ExperimentFeedback"><span class="pre">ExperimentFeedback</span></a></span></span><a class="headerlink" href="#rdagent.core.proposal.Experiment2Feedback.generate_feedback" title="Link to this definition">¶</a></dt>
+<dd><p>应执行 <cite>exp</cite> 并包含结果，以及与先前结果的比较（由 LLM 完成）。例如：Qlib 的 <cite>mlflow</cite> 将被包含。</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo of RDAgent"/>
+            </a></p>
+  <div>
+    <h3><a href="index.html">目录</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">API参考</a><ul>
+<li><a class="reference internal" href="#rd-loop">RD 循环</a><ul>
+<li><a class="reference internal" href="#module-rdagent.core.proposal">研究</a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.Hypothesis"><code class="docutils literal notranslate"><span class="pre">Hypothesis</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.core.proposal.ExperimentFeedback"><code class="docutils literal notranslate"><span class="pre">ExperimentFeedback</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.ExperimentFeedback.from_exception"><code class="docutils literal notranslate"><span class="pre">ExperimentFeedback.from_exception()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rdagent.core.proposal.HypothesisFeedback"><code class="docutils literal notranslate"><span class="pre">HypothesisFeedback</span></code></a></li>
+<li><a class="reference internal" href="#rdagent.core.proposal.Trace"><code class="docutils literal notranslate"><span class="pre">Trace</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.Trace.get_sota_hypothesis_and_experiment"><code class="docutils literal notranslate"><span class="pre">Trace.get_sota_hypothesis_and_experiment()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rdagent.core.proposal.ExpGen"><code class="docutils literal notranslate"><span class="pre">ExpGen</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.ExpGen.gen"><code class="docutils literal notranslate"><span class="pre">ExpGen.gen()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rdagent.core.proposal.HypothesisGen"><code class="docutils literal notranslate"><span class="pre">HypothesisGen</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.HypothesisGen.gen"><code class="docutils literal notranslate"><span class="pre">HypothesisGen.gen()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rdagent.core.proposal.Hypothesis2Experiment"><code class="docutils literal notranslate"><span class="pre">Hypothesis2Experiment</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.Hypothesis2Experiment.convert"><code class="docutils literal notranslate"><span class="pre">Hypothesis2Experiment.convert()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rdagent.core.proposal.Experiment2Feedback"><code class="docutils literal notranslate"><span class="pre">Experiment2Feedback</span></code></a><ul>
+<li><a class="reference internal" href="#rdagent.core.proposal.Experiment2Feedback.generate_feedback"><code class="docutils literal notranslate"><span class="pre">Experiment2Feedback.generate_feedback()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>上一主题</h4>
+    <p class="topless"><a href="development.html"
+                          title="上一章">开发中</a></p>
+  </div>
+  <div>
+    <h4>下一主题</h4>
+    <p class="topless"><a href="policy.html"
+                          title="下一章">策略</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>本页</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/api_reference.rst.txt"
+            rel="nofollow">显示源代码</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="提交" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>导航</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="总索引"
+             >索引</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python 模块索引"
+             >模块</a> |</li>
+        <li class="right" >
+          <a href="policy.html" title="策略"
+             >下一页</a> |</li>
+        <li class="right" >
+          <a href="development.html" title="开发中"
+             >上一页</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">RDAgent v0.4.0 文档</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">API参考</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; 版权所有 2024, Microsoft.
+      由 <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3创建。
+    </div>
+  </body>
+</html>
