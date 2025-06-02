@@ -88,6 +88,9 @@ class LoopBase:
     loop_trace: dict[int, list[LoopTrace]]
 
     skip_loop_error: tuple[type[BaseException], ...] = ()  # you can define a list of error that will skip current loop
+    withdraw_loop_error: tuple[
+        type[BaseException], ...
+    ] = ()  # you can define a list of error that will withdraw current loop
 
     EXCEPTION_KEY = "_EXCEPTION"
 
@@ -138,6 +141,20 @@ class LoopBase:
                         + current_local_datetime.year * 1e10
                     )
                     mlflow.log_metric("current_datetime", float_like_datetime)
+                    mlflow.log_metric("api_fail_count", RD_Agent_TIMER_wrapper.api_fail_count)
+                    lastest_api_fail_time = RD_Agent_TIMER_wrapper.latest_api_fail_time
+                    if lastest_api_fail_time is not None:
+                        mlflow.log_metric(
+                            "lastest_api_fail_time",
+                            (
+                                lastest_api_fail_time.second
+                                + lastest_api_fail_time.minute * 1e2
+                                + lastest_api_fail_time.hour * 1e4
+                                + lastest_api_fail_time.day * 1e6
+                                + lastest_api_fail_time.month * 1e8
+                                + lastest_api_fail_time.year * 1e10
+                            ),
+                        )
 
                 if self.timer.started:
                     if RD_AGENT_SETTINGS.enable_mlflow:
@@ -169,6 +186,11 @@ class LoopBase:
                             self.step_idx = len(self.steps) - 1  # directly jump to the last step.
                             self.loop_prev_out[self.EXCEPTION_KEY] = e
                             continue
+                        elif isinstance(e, self.withdraw_loop_error):
+                            logger.warning(f"Withdraw loop {li} due to {e}")
+                            # Back to previous loop
+                            self.step_backward(li - 1)
+                            continue
                         else:
                             raise
                     finally:
@@ -193,6 +215,27 @@ class LoopBase:
 
                 self.dump(self.session_folder / f"{li}" / f"{si}_{name}")  # save a snapshot after the session
 
+    def step_backward(self, li: int) -> None:
+        prev_session_dir = self.session_folder / str(li)
+        prev_path = min(
+            (p for p in prev_session_dir.glob("*_*") if p.is_file()),
+            key=lambda item: int(item.name.split("_", 1)[0]),
+            default=None,
+        )
+        if prev_path:
+            loaded = type(self).load(
+                prev_path,
+                output_path=self.session_folder.parent,
+                do_truncate=False,
+                replace_timer=True,
+            )
+            logger.info(f"Load previous session from {prev_path}")
+            # Overwrite current instance state
+            self.__dict__ = loaded.__dict__
+        else:
+            logger.error(f"No previous dump found at {prev_session_dir}, cannot withdraw loop {li}")
+            raise
+
     def dump(self, path: str | Path) -> None:
         if RD_Agent_TIMER_wrapper.timer.started:
             RD_Agent_TIMER_wrapper.timer.update_remain_time()
@@ -214,10 +257,13 @@ class LoopBase:
             session = cast(LoopBase, pickle.load(f))
 
         # set session folder
-        if output_path:
-            output_path = Path(output_path)
-            output_path.mkdir(parents=True, exist_ok=True)
-            session.session_folder = output_path / "__session__"
+        # - P1: if output_path explicitly specified.
+        # - P2: RD_AGENT_SETTINGS.log_trace_path
+        output_path_value = output_path if output_path is not None else RD_AGENT_SETTINGS.log_trace_path
+        if output_path_value is not None:
+            output_path_path = Path(output_path_value)
+            output_path_path.mkdir(parents=True, exist_ok=True)
+            session.session_folder = output_path_path / "__session__"
 
         # set trace path
         logger.set_trace_path(session.session_folder.parent)

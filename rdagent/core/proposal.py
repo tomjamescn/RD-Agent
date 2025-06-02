@@ -3,15 +3,12 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, Generic, TypeVar
+from typing import Generic, TypeVar
 
 from rdagent.core.evaluation import Feedback
 from rdagent.core.experiment import ASpecificExp, Experiment
 from rdagent.core.knowledge_base import KnowledgeBase
 from rdagent.core.scenario import Scenario
-
-if TYPE_CHECKING:
-    from rdagent.core.prompts import Prompts
 
 # class data_ana: XXX
 
@@ -42,12 +39,7 @@ class Hypothesis:
 
     def __str__(self) -> str:
         return f"""Hypothesis: {self.hypothesis}
-                Reason: {self.reason}
-                Concise Reason & Knowledge: {self.concise_reason}
-                Concise Observation: {self.concise_observation}
-                Concise Justification: {self.concise_justification}
-                Concise Knowledge: {self.concise_knowledge}
-                """
+Reason: {self.reason}"""
 
     # source: data_ana | model_nan = None
 
@@ -149,8 +141,19 @@ class CheckpointSelector:
         - `(idx, )` represents starting from the `idx`-th trial in the trace.
         - `None` represents starting from scratch (start a new trace)
 
-
         - More advanced selection strategies in `select.py`
+        """
+
+
+class SOTAexpSelector:
+    """
+    Select the SOTA experiment from the trace to submit
+    """
+
+    @abstractmethod
+    def get_sota_exp_to_submit(self, trace: Trace) -> Experiment | None:
+        """
+        Select the SOTA experiment from the trace to submit
         """
 
 
@@ -160,7 +163,7 @@ class ExpGen(ABC):
         self.scen = scen
 
     @abstractmethod
-    def gen(self, trace: Trace, selection: tuple[int, ...] = (-1,)) -> Experiment:
+    def gen(self, trace: Trace) -> Experiment:
         """
         Generate the experiment based on the trace.
 
@@ -176,11 +179,6 @@ class ExpGen(ABC):
 
 
 class HypothesisGen(ABC):
-    # NOTE: the design is a little wierd
-    # - Sometimes we want accurate access the prompts in a specific level
-    #   - It renders the prompt to a specific abstract level
-    # - Sometimes we want to access the most recent level prompts
-    prompts: Prompts  # this is a class level prompt.
 
     def __init__(self, scen: Scenario) -> None:
         self.scen = scen
